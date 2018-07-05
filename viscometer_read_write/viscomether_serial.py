@@ -2,7 +2,7 @@
 
 # Read & print/write data
 import serial
-ser = serial.Serial('/dev/ttyUSB0',19200, 8, 'N', 1, timeout = 5)
+ser = serial.Serial('/dev/ttyS0',19200, 8, 'N', 1, timeout = 5)
 # Open ve_direct.csv
 file_data = open('ve_data.csv', 'w')
 print "Reading data and writing to ve_data.csv"
