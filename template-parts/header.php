@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php
-require("/functions/functions.php");
-?>
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="/assets-minified/ext/bootstrap/css/bootstrap.min.css"/>
