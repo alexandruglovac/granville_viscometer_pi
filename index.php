@@ -1,8 +1,10 @@
 <?php
 require('template-parts/header.php');
-
-echo "hello world";
-
-
+?>
+<div class="container">
+  <div class="content">
+  </div>
+</div>
+<?php
 require('template-parts/footer.php');
  ?>
