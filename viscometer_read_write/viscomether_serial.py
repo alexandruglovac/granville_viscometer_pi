@@ -1,14 +1,18 @@
-#!/usr/bin/python
-
-# Read & print/write data
+#!/usr/bin/env python
+import time
 import serial
-ser = serial.Serial('/dev/ttyS0',19200, 8, 'N', 1, timeout = 5)
-# Open ve_direct.csv
-file_data = open('ve_data.csv', 'w')
-print "Reading data and writing to ve_data.csv"
-# Listen for the input, exit if nothing received in timeout period
-output = " "
-while True:
-  while output != "":
-    output = ser.readline()
-    file_data.write(output)
+
+ser = serial.Serial(
+        port=' /dev/ttyS0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
+        baudrate = 9600,
+        parity=serial.PARITY_NONE,
+        stopbits=serial.STOPBITS_ONE,
+        bytesize=serial.EIGHTBITS,
+        timeout=1
+)
+counter=0
+
+while 1:
+        ser.write("Write counter: %d \n"%(counter))
+        time.sleep(1)
+        counter += 1
