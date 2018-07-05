@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-import serial, string
-
+# Read & print/write data
+ser = serial.Serial('/dev/ttyUSB0',19200, 8, 'N', 1, timeout = 5)
+# Open ve_direct.csv
+file_data = open('ve_data.csv', 'w')
+print "Reading data and writing to ve_data.csv"
+# Listen for the input, exit if nothing received in timeout period
 output = " "
-ser = serial.Serial('/dev/ttyUSB0', 4800, 8, 'N', 1, timeout=1)
 while True:
-  print "----"
   while output != "":
     output = ser.readline()
-    print output
-  output = " "
+    file_data.write(output)
