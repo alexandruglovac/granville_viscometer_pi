@@ -12,7 +12,7 @@ time.sleep(1)
 try:
     ser.write('Hello World\r\n')
     ser.write('Serial Communication Using Raspberry Pi\r\n')
-    ser.write('By: Embedded Laboratory\r\n')
+    ser.write('By: Viscometer 1\r\n')
     print 'Data Echo Mode Enabled'
     while True:
         if ser.inWaiting() > 0:
@@ -23,7 +23,7 @@ except KeyboardInterrupt:
     print "Exiting Program"
 
 except:
-    print "Error Occurs, Exiting Program"
+    print "Error Occured, Exiting Program"
 
 finally:
     ser.close()
