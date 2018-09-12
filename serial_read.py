@@ -1,30 +1,34 @@
-import time
 import serial
-
-print "Starting program"
-
-ser = serial.Serial('/dev/ttyUSB0', baudrate=9600,
-                    parity=serial.PARITY_NONE,
-                    stopbits=serial.STOPBITS_ONE,
-                    bytesize=serial.EIGHTBITS
-                    )
-time.sleep(1)
+import time
+from time import gmtime, strftime
+import struct
+#serial port settings
+dmm = serial.Serial(
+port='/dev/ttyAMA0',
+baudrate=9600,
+bytesize=8,
+parity=serial.PARITY_NONE,
+stopbits=serial.STOPBITS_ONE,
+ )
+#handling exceptions
 try:
-    ser.write('Hello World\r\n')
-    ser.write('Serial Communication Using Raspberry Pi\r\n')
-    ser.write('By: Viscometer 1\r\n')
-    print 'Data Echo Mode Enabled'
-    while True:
-        if ser.inWaiting() > 0:
-            data = ser.read()
-            print data
-        
-except KeyboardInterrupt:
-    print "Exiting Program"
-
-except:
-    print "Error Occured, Exiting Program"
-
-finally:
-    ser.close()
-    pass
+dmm.open()
+except Exception, e:
+print "problem faced while openning the port : " +str(e)
+exit()
+print "Lab Viscometer"
+print "-------------------------------------------------------"
+dmm.isOpen()
+file = open("/home/pi/granville/py_Serial/dmmLogFile.txt", "a")
+while True:
+dmm.write('QM\r')
+dmm.flushInput()
+data = dmm.read(14)
+if data == '':
+dmm.close()
+else:
+print data
+time.sleep(1)
+ print >>file,data,' -> ',strftime("%d %b %Y,%H:%M:%S")
+file.flush()
+file.close()
